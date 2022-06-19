@@ -1,3 +1,31 @@
 Rails.application.routes.draw do
+devise_for :customers,skip: [:passwords], controllers: {
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
+}
+
+namespace :public do
+
+  get 'homes/top' => 'homes#top'
+  get 'homes/about' => 'homes#about'
+  get 'customers/unsubscribe' => 'customers#unsubscribe'
+  get 'customers/withdrawal' => 'customers#withdrawal'
+  patch 'customers/withdrawal' => 'customers#withdrawal'
+    resources :customers, only: [:show, :edit, :update, :index]
+    resources :contribution, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :menu, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :shop, only: [:new, :show, :index, :edit, :update, :destroy]
+end
+
+devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+}
+namespace :admin do
+  root to: 'homes#top'
+    resources :customers, only: [:show, :edit, :update, :index]
+    resources :contribution, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :menu, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :shop, only: [:new, :show, :index, :edit, :update, :destroy]
+end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
