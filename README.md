@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# ラーメンMap
 
-Things you may want to cover:
+## サイト概要
+### サイトテーマ
+地域ごとのうまい一杯をいつでも気軽に探すことができ、自分自身の
+おすすめの一杯を気軽にお探しいただけます。
+これからの自粛期間が明け、旅行やちょっとした外出先でも、おすすめの
+うまい一杯を手軽に短時間で探すこともでき、その一杯をみんなで共有し
+新しい一杯とも巡り合うことができます
 
-* Ruby version
+### テーマを選んだ理由
+うまいと話題の一杯を食べたときにうまいけど、自分の求めていたものとは違っていたり
+また新しい一杯を求めたいときがあり。どんな一杯が自分にあっているのか、自分の求めている一杯
+とは何かを探す際の一つの可能性になりたいと思いました。
+また自分以外の人がうまいと思った一杯、誰かの思い出の一杯を共有できる場所を作りたいと思いました。
 
-* System dependencies
+### ターゲットユーザ
+- うまい一杯をお探しの方
+- 旅行先でうまい一杯をお探しの方
+- 新しい一杯との出会いをお探しの方
+- ちょっとした外出先での一杯をお探しの方
 
-* Configuration
+### 主な利用シーン
+- うまい一杯を探す際に
+- 旅先やちょっとした外出先など
+- 新しい一杯をお求めの際
+- 皆様のおすすめの一杯を参考になど
 
-* Database creation
+## 設計書
+https://docs.google.com/spreadsheets/d/1loXe7sI19lEP0iCX-ki8s8trOG_7A0XWa2QDr8nKI_I/edit?usp=sharing
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
