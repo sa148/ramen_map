@@ -1,9 +1,9 @@
 class Public::CustomersController < ApplicationController
-  
+
   def index
     @customers = Customer.all
   end
-  
+
   def show
     @customer = Customer.find(params[:id])
   end
@@ -26,7 +26,7 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     @customer.update(is_deleted: true)
     reset_session
-    redirect_to public_path
+    redirect_to public_homes_top_path
   end
 
   private
