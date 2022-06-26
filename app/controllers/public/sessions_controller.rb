@@ -31,7 +31,8 @@ class Public::SessionsController < Devise::SessionsController
     public_customers_path
   end
 
-  protected
+  #protected
+
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
     return if !@customer
@@ -39,4 +40,14 @@ class Public::SessionsController < Devise::SessionsController
     end
     redirect_to public_homes_top_path
   end
+
+  def new_guest
+    customer = Customer.find_or_create_by!(email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+    end
+    sign_in customer
+    redirect_to public_homes_top_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
 end
