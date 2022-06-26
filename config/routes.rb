@@ -11,6 +11,7 @@ namespace :public do
   get 'customers/unsubscribe' => 'customers#unsubscribe'
   get 'customers/withdrawal' => 'customers#withdrawal'
   patch 'customers/withdrawal' => 'customers#withdrawal'
+  post 'customers/guest_sign_in', to: 'customers/guest/sign_in#new_guest'
     resources :customers, only: [:show, :edit, :update, :index]
     resources :contribution, only: [:new, :show, :index, :edit, :update, :destroy]
     resources :menu, only: [:new, :show, :index, :edit, :update, :destroy]

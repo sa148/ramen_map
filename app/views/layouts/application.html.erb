@@ -35,7 +35,10 @@
                 <P>投稿一覧</P>
                 <% end %>
               <% else %>
+                <%= link_to public_customers_guest_sign_in_path, method: :post, class: 'nav-link text-dark' do%>
+                <p>ゲストログイン</p>
                 <% end %>
+              <% end %>
     </header>
     <%= yield %>
   </body>
