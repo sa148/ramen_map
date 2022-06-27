@@ -31,15 +31,21 @@
                 <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
                 <p>ログアウト</p>
                 <% end %>
-                <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
+                <%= link_to public_contributions_path, class: 'nav-link text-dark' do%>
                 <P>投稿一覧</P>
                 <% end %>
               <% else %>
                 <%= link_to public_customers_guest_sign_in_path, method: :post, class: 'nav-link text-dark' do%>
                 <p>ゲストログイン</p>
                 <% end %>
+                <%= link_to public_contributions_path, class: 'nav-link text-dark' do%>
+                <P>投稿一覧</P>
+                <% end %>
               <% end %>
     </header>
+    <main class="mb-auto">
+      <%= flash[:notice]  %>
     <%= yield %>
+    </main>
   </body>
 </html>
