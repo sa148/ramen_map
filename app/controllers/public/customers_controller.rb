@@ -2,6 +2,7 @@ class Public::CustomersController < ApplicationController
 
   def index
     @customers = Customer.all
+    @contributions = Contribution.all
   end
 
   def show

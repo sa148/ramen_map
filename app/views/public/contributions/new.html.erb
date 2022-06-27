@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+<h1>ラーメンMap 投稿ページ</h1>
+  <%= form_with model: @contribution,url:public_contributions_path,method: :post do |f| %>
+  <%#= f.hidden_field :menu_id, { value: menu.id} %>
+<div class="field">
+  <%= f.label :一杯 %><br />
+  <%= f.text_field :title %>
+</div>
+<div class="field">
+  <%= f.label :評価 %><br />
+  <%= f.text_area :comment %>
+</div>
+<br><%= f.file_field :image, accept: "image/*" %><br>
+<br><%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
+<% end %>
+</div>
+  </div>
+   </div>
