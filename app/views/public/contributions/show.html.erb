@@ -14,6 +14,8 @@
     </tr>
   </tbody>
 </table>
+    <th><%= link_to "投稿変更", edit_public_contribution_path(@contribution.id), class:"btn btn-info btn-sm btn-block sign_up" %></th>
+   <th><%= link_to '取り消し',public_contribution_path(@contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%></th>
 </div>
   </div>
     </div>

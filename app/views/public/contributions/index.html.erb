@@ -2,24 +2,27 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 <h1>ラーメンMap　投稿一覧</h1>
+<h2><%= link_to '投稿検索ページ', search_public_contribution_path(@contributions.ids), class: "btn btn-info btn-sm btn-block sign_up"%></h2>
 <table>
   <% @contributions.each do |contribution| %>
-  <% @customers.each do |customer| %>
+  <%# @customers.each do |customer| %>
   <thead>
     <tr>
-      <td>投稿者<%= customer.name %><br>タイトル <%= contribution.title %></td>
+      <td>投稿者<%= @customers %><br>タイトル <%= contribution.title %></td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%= image_tag contribution.get_image %><br>コメント <%= contribution.comment %></td>
-      <th><%= link_to '取り消し',public_contribution_path(contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%></th>
-      <th><%= link_to "投稿詳細", public_contribution_path(contribution.id), class:"btn btn-primary btn-sm btn-block sign_up" %></th>
-      <th><%= link_to "投稿変更", edit_public_contribution_path(contribution.id), class:"btn btn-info btn-sm btn-block sign_up" %></th>
+      <td>
+        <%= link_to public_contribution_path(contribution.id) do%>
+        <%= image_tag contribution.get_image %>
+        <% end %>
+        <br>コメント <%= contribution.comment %>
+      </td>
     </tr>
   </tbody>
   <% end %>
-  <% end %>
+  <%# end %>
 </table>
 </div>
   </div>

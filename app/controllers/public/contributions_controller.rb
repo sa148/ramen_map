@@ -16,6 +16,8 @@ class Public::ContributionsController < ApplicationController
   def index
     @contributions = Contribution.all
     @customers = Customer.all
+    #@customer = current_customer
+    #@customers.name = Contribution.customer.name
   end
 
   def show
@@ -51,10 +53,21 @@ class Public::ContributionsController < ApplicationController
     end
   end
 
+  def search
+    @contributions = Contribution.all
+    if params[:title].present?
+      @contributions = Contribution.where('title LIKE ?', "%#{params[:title]}%")
+    else
+      @contributions = Contribution.none
+    end
+  end
+
+
+
   private
 
   def  contribution_params
-    params.require(:contribution).permit(:customer_id, :menu_id, :title, :revue, :comment, :image)
+    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image)
   end
 
 end
