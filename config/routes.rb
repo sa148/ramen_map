@@ -23,9 +23,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 namespace :admin do
-  root to: 'homes#top'
-    resources :customers, only: [:show, :edit, :update, :index]
-    resources :contribution, only: [:new, :show, :index, :edit, :update, :destroy]
+  get 'homes/top' => 'homes#top'
+  get 'homes/about' => 'homes#about'
+    resources :customers, only: [:show, :index, :destroy]
+    resources :contributions, only: [:new, :show, :index, :edit, :update, :destroy]
     resources :menu, only: [:new, :show, :index, :edit, :update, :destroy]
     resources :shop, only: [:new, :show, :index, :edit, :update, :destroy]
 end

@@ -1,9 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-<h1>ラーメンMap　投稿一覧</h1>
-<p>画像をクリックしていただくと投稿の詳細をご確認できます</p>
-<h2><%= link_to '投稿検索ページ', search_public_contribution_path(@contributions.ids), class: "btn btn-info btn-sm btn-block sign_up"%></h2>
+<h1>投稿一覧</h1>
 <table>
   <% @contributions.each do |contribution| %>
   <%# @customers.each do |customer| %>
@@ -15,7 +13,7 @@
   <tbody>
     <tr>
       <td>
-        <%= link_to public_contribution_path(contribution.id) do%>
+        <%= link_to admin_contribution_path(contribution.id) do%>
         <%= image_tag contribution.get_image %>
         <% end %>
         コメント <%= contribution.comment %>
