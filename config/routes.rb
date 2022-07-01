@@ -27,8 +27,7 @@ namespace :admin do
   get 'homes/about' => 'homes#about'
     resources :customers, only: [:show, :index, :destroy]
     resources :contributions, only: [:new, :show, :index, :edit, :update, :destroy]
-    resources :menu, only: [:new, :show, :index, :edit, :update, :destroy]
-    resources :shop, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :shops, only: [:new, :show, :index, :edit, :update, :destroy]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
