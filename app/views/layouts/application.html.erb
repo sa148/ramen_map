@@ -20,8 +20,16 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
+                <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do%>
+                <p>ログアウト</p>
                 <% end %>
-              <% if customer_signed_in? %>
+                <%= link_to admin_customers_path, class: 'nav-link text-dark' do%>
+                <p>一覧</p>
+                <% end %>
+                <%= link_to admin_contributions_path, class: 'nav-link text-dark' do%>
+                <p>投稿</p>
+                <% end %>
+              <% elsif customer_signed_in? %>
                 <%= link_to public_customers_path, class: 'nav-link text-dark' do%>
                 <p>お客様一覧</p>
                 <% end %>

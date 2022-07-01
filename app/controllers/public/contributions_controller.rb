@@ -11,6 +11,7 @@ class Public::ContributionsController < ApplicationController
     @contribution.customer_id = current_customer.id
     @contribution.save
     redirect_to public_contributions_path
+    flash[:notice] = "投稿が完了しました"
   end
 
   def index
@@ -32,6 +33,7 @@ class Public::ContributionsController < ApplicationController
     @contribution = Contribution.find(params[:id])
     @contribution.update(contribution_params)
     redirect_to public_contributions_path
+    flash[:notice] = "投稿の変更が完了しました"
   end
 
   def destroy
@@ -57,8 +59,10 @@ class Public::ContributionsController < ApplicationController
     @contributions = Contribution.all
     if params[:title].present?
       @contributions = Contribution.where('title LIKE ?', "%#{params[:title]}%")
+      flash[:notice] = "投稿検索が完了しました"
     else
       @contributions = Contribution.none
+       flash[:notice] = "他人の投稿は削除できません"
     end
   end
 
