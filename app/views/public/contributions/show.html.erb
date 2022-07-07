@@ -1,21 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-<h2>ラーメンMap投稿詳細</h2>
-<table class="mx-auto">
-  <thead>
-    <tr>
-      <td><h3>投稿</h3></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>店名  麵屋ボタン<br>メニュー  羊ラーメン<br><%= image_tag @contribution.get_image %><br>コメント <%= @contribution.comment %><br>レビュー</td>
-    </tr>
-  </tbody>
-</table>
-    <th><%= link_to "投稿変更", edit_public_contribution_path(@contribution.id), class:"btn btn-info btn-sm btn-block sign_up" %></th>
-   <th><%= link_to '取り消し',public_contribution_path(@contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%></th>
-</div>
-  </div>
+      <h2>ラーメンMap投稿詳細</h2>
+        <table class="mx-auto">
+          <thead>
+            <tr>
+              <td><h3>投稿</h3></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>店名  麵屋ボタン<br>メニュー  羊ラーメン<br><%= image_tag @contribution.get_image %><br>コメント<br> <%= @contribution.comment %><br>レビュー<div id="star-rate<%= @contribution.id%>"></td>
+                     <script>
+                      $('#star-rate<%= @contribution.id %>').empty();
+                      $('#star-rate<%= @contribution.id%>').raty({
+                         size      : 36,
+                         starOff   : '<%= asset_path('star-off.png') %>',
+                         starOn    : '<%= asset_path('star-on.png') %>',
+                         half      : false,
+                         readOnly: true,
+                         score: <%= @contribution.star %>,
+                       });
+                     </script></td>
+            </tr>
+          </tbody>
+        </table>
+          タグ<% @tag_list.each do |list| %> <%= list.tag_name %> <% end %>
+          <%= link_to "投稿変更", edit_public_contribution_path(@contribution.id), class:"btn btn-info btn-sm btn-block sign_up" %>
+          <%= link_to '取り消し', public_contribution_path(@contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%>
     </div>
+  </div>
+</div>

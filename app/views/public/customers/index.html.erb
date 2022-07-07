@@ -17,7 +17,19 @@
         <%= link_to public_contribution_path(contribution.id) do%>
         <%= image_tag contribution.get_image %>
         <% end %>
-        <br>コメント <%= contribution.comment %>
+        <td>コメント<%= contribution.comment %><br>レビュー<div id="star-rate<%= customer.contribution.ids%>"></td>
+                     <script>
+                      $('#star-rate<%= customer.contribution.ids %>').empty();
+                      $('#star-rate<%= customer.contribution.ids%>').raty({
+                         size      : 36,
+                         starOff   : '<%= asset_path('star-off.png') %>',
+                         starOn    : '<%= asset_path('star-on.png') %>',
+                         half      : false,
+                         readOnly: true,
+                         score: <%= customer.contribution %>,
+                       });
+                     </script>
+        </td>
       </td>
     </tr>
   </tbody>

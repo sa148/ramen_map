@@ -9,20 +9,27 @@ class Public::ContributionsController < ApplicationController
   def create
     @contribution = Contribution.new(contribution_params)
     @contribution.customer_id = current_customer.id
-    @contribution.save
-    redirect_to public_contributions_path
-    flash[:notice] = "投稿が完了しました"
+    @tag_list = params[:contribution][:tag_name].split("、")
+    if @contribution.save
+       @contribution.save_tag(@tag_list)
+       redirect_to public_contributions_path
+       flash[:notice] = "投稿が完了しました"
+    else
+       flash[:notice] = "投稿が失敗しました"
+       render 'new'
+    end
   end
 
   def index
     @contributions = Contribution.all
     @customers = Customer.all
-    #@customer = current_customer
-    #@customers.name = Contribution.customer.name
   end
 
   def show
     @contribution = Contribution.find(params[:id])
+    @contribution_tags = @contribution.tags
+    @tag_list = Tag.all
+    @tags = Tag.all
   end
 
   def edit
@@ -57,13 +64,12 @@ class Public::ContributionsController < ApplicationController
 
   def search
     @contributions = Contribution.all
-    if params[:title].present?
-      @contributions = Contribution.where('title LIKE ?', "%#{params[:title]}%")
-      flash[:notice] = "投稿検索が完了しました"
-    else
-      @contributions = Contribution.none
-       flash[:notice] = "他人の投稿は削除できません"
+    @customers = Customer.all
+    if params[:tag_id] != nil
+      @contributions = Tag.find_by(id: params[:tag_id]).contributions
+      flash[:notice] = "投稿の検索に成功しました"
     end
+    @tag_list = Tag.all
   end
 
 
@@ -71,7 +77,7 @@ class Public::ContributionsController < ApplicationController
   private
 
   def  contribution_params
-    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image)
+    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_list)
   end
 
 end
