@@ -1,20 +1,38 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-<h2>ラーメンMap投稿編集</h2>
-<%= form_with model: @contribution,url:public_contributions_path,method: :post do |f| %>
-  <%#= f.hidden_field :menu_id, { value: menu.id} %>
-<div class="field">
-  <%= f.label :一杯 %><br />
-  <%= f.text_field :title %>
-</div>
-<div class="field">
-  <%= f.label :評価 %><br />
-  <%= f.text_area :comment %>
-</div>
-<br><%= f.file_field :image, accept: "image/*" %><br>
-<br><%= f.submit '投稿編集', class: "btn btn-primary btn-sm btn-block sign_up"%>
-<% end %>
-</div>
-  </div>
+      <h1>ラーメンMap投稿変更</h1>
+        <%= form_with model: @contribution, local:true, url:public_contributions_path,method: :post do |f| %>
+          <div class="field">
+            <%= f.label :タイトル %><br />
+            <%= f.text_field :title %>
+          </div>
+          <div class="field">
+          <%= f.label :タグ %><br />
+          <%= f.text_field :tag_name %>
+          </div>
+          <div class="field">
+            <%= f.label :評価 %><br />
+            <%= f.text_area :comment %>
+          </div>
+          <p>レビュー</p>
+          <div class="form-group row" id="star">
+            <%= f.label :star,'レビュー ', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :star, id: :review_star %>
+            <script>
+            　$('#star').empty();
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+             　 　　　scoreName: 'contribution[star]',
+                half: false,
+              });
+            </script>
+          </div>
+          <br><%= f.file_field :image, accept: "image/*" %><br>
+          <br><%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
+      <% end %>
     </div>
+  </div>
+</div>

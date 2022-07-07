@@ -25,10 +25,12 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_out_path_for(resource)
+    flash[:notice] = "お疲れ様でした"
     public_homes_top_path
   end
   def after_sign_in_path_for(resource)
-    public_customers_path
+    flash[:notice] = "ラーメンMapへお帰りなさい"
+    public_customer_path(current_customer.id)
   end
 
   #protected
@@ -42,12 +44,10 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def new_guest
-    customer = Customer.find_or_create_by!(email: 'guest@example.com') do |customer|
-      customer.password = SecureRandom.urlsafe_base64
-      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
-    end
-    sign_in customer
-    redirect_to public_homes_top_path, notice: 'ゲストユーザーとしてログインしました。'
+    user = Customer.guest
+    sign_in user
+    redirect_to public_homes_top_path, flash[:notice] = 'ゲストユーザーとしてログインしました。'
   end
+
 
 end

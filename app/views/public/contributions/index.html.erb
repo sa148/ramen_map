@@ -1,30 +1,42 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-<h1>ラーメンMap　投稿一覧</h1>
-<p>画像をクリックしていただくと投稿の詳細をご確認できます</p>
-<h2><%= link_to '投稿検索ページ', search_public_contribution_path(@contributions.ids), class: "btn btn-info btn-sm btn-block sign_up"%></h2>
-<table>
-  <% @contributions.each do |contribution| %>
-  <%# @customers.each do |customer| %>
-  <thead>
-    <tr>
-      <td>投稿者<%= @customers %><br>タイトル <%= contribution.title %></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <%= link_to public_contribution_path(contribution.id) do%>
-        <%= image_tag contribution.get_image %>
-        <% end %>
-        コメント <%= contribution.comment %>
-      </td>
-    </tr>
-  </tbody>
-  <% end %>
-  <%# end %>
-</table>
-</div>
-  </div>
+      <h1>ラーメンMap　投稿一覧</h1>
+        <p>画像をクリックしていただくと投稿の詳細をご確認できます</p>
+          <h2><%= link_to '投稿検索ページ', search_public_contributions_path(@contributions.ids), class: "btn btn-info btn-sm btn-block sign_up"%></h2>
+            <table>
+              <% @contributions.each do |contribution| %>
+                <thead>
+                  <tr>
+                    <td>投稿者<%= contribution.customer.name %><br>タイトル <%= contribution.title %></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <%= link_to public_contribution_path(contribution.id) do%>
+                      <%= image_tag contribution.get_image %>
+                      <% end %>
+                    </td>
+                    <td>
+                     <br>コメント<br><%= contribution.comment %><br>レビュー<div id="star-rate<%= contribution.id%>">
+                        <script>
+                          $('#star-rate<%= contribution.id %>').empty();
+                          $('#star-rate<%= contribution.id%>').raty({
+                            size      : 36,
+                            starOff   : '<%= asset_path('star-off.png') %>',
+                            starOn    : '<%= asset_path('star-on.png') %>',
+                            half      : false,
+                            readOnly: true,
+                            score: <%= contribution.star %>,
+                          });
+                        </script>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              <% end %>
+            </table>
     </div>
+  </div>
+</div>

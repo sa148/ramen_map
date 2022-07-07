@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_26_145344) do
+ActiveRecord::Schema.define(version: 2022_07_03_135004) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,11 +53,13 @@ ActiveRecord::Schema.define(version: 2022_06_26_145344) do
   end
 
   create_table "contributions", force: :cascade do |t|
-    t.integer "customer_id", null: false
     t.text "title", null: false
+    t.string "star", null: false
     t.string "comment", null: false
+    t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_contributions_on_customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -75,6 +77,24 @@ ActiveRecord::Schema.define(version: 2022_06_26_145344) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "tagmaps", force: :cascade do |t|
+    t.integer "contribution_id"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contribution_id"], name: "index_tagmaps_on_contribution_id"
+    t.index ["tag_id"], name: "index_tagmaps_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "contributions", "customers"
+  add_foreign_key "tagmaps", "contributions"
+  add_foreign_key "tagmaps", "tags"
 end
