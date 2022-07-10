@@ -1,7 +1,7 @@
 class CreateContributions < ActiveRecord::Migration[6.1]
   def change
     create_table :contributions do |t|
-      #t.integer :menu_id, null: false
+      #t.integer :shop_id, null: false
       t.text :title, null: false
       t.string :star, null: false
       t.string :comment, null: false

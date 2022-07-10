@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>ラーメンMap　店舗情報入力　</h1>
+      <%= form_with model: @shop, local: true,  url:admin_shops_path,method: :post do |f|%>
+        <div class="field">
+          <%= f.label :店名 %><br />
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :店舗詳細 %><br />
+          <%= f.text_field :introduction %>
+        </div>
+        <div class="field">
+          <%= f.label :メニュー %><br />
+          <%= f.text_field :menu_name %>
+        </div>
+        <div class="field">
+          <%= f.label :商品説明 %><br />
+          <%= f.text_field :menu_introduction %>
+        </div>
+        <div class="field">
+          <%= f.label :値段 %><br />
+          <%= f.text_field :price %>
+        </div>
+        <div class="field">
+          <%= f.label :電話番号 %><br />
+          <%= f.text_field :telephone_number %>
+        </div>
+        <div class="field">
+          <%= f.label :メールアドレス %><br />
+          <%= f.text_field :email %>
+        </div>
+        <div class="field">
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+          <div class="field">
+              <%= f.label :address, class: 'shop_name'%>
+              <%= f.text_field :address,  id: "address", class: 'shop_introduction'%>
+          </div>
+          <div class="field">
+              <%= f.label :latitude, class: 'shop_name'%>
+              <%= f.text_field :latitude,  id: "latitude", class: 'shop_introduction'%>
+          </div>
+          <div class="field">
+              <%= f.label :longitude, class: 'shop_name'%>
+              <%= f.text_field :longitude, id: "longitude", class: 'shop_introduction'%>
+          </div>
+        <%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
+      <% end %>
+      <%= link_to "店舗一覧",admin_shops_path, class:"btn btn-info btn-sm btn-block sign_up"%>
+    </div>
+  </div>
+</div>
+
+ <style>
+      #header {
+          background-color: darkblue;
+          padding: 3px;
+          width: 1195px;
+          font-family: Meriyo UI;
+          font-size: 14px;
+          color: white;
+      }
+      #target {
+        width: 1200px;
+        height: 700px;
+      }
+    </style>
+
+    <div id="header"><b>Google Maps - 場所検索</b></div>
+    <div>施設名称検索 （例：マチュピチュ、万里の長城）</div>
+    <input type="text" id="keyword"><button id="search">検索実行</button>
+    <button id="clear">結果クリア</button>
+    <div id="target"></div>
+    <script>
+
+      var map;
+      var marker;
+      var infoWindow;
+
+      function initMap() {
+
+        //マップ初期表示の位置設定
+        var target = document.getElementById('target');
+        var centerp = {lat: 35.6893138, lng: 139.6903285};
+
+        //マップ表示
+        map = new google.maps.Map(target, {
+          center: centerp,
+          zoom: 12,
+        });
+
+        // 検索実行ボタンが押下されたとき
+        document.getElementById('search').addEventListener('click', function() {
+
+          var place = document.getElementById('keyword').value;
+          var geocoder = new google.maps.Geocoder();      // geocoderのコンストラクタ
+
+          geocoder.geocode({
+            address: place
+          }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+
+              var bounds = new google.maps.LatLngBounds();
+
+              for (var i in results) {
+                if (results[0].geometry) {
+                  // 緯度経度を取得
+                  var latlng = results[0].geometry.location;
+                  // 住所を取得
+                  var address = results[0].formatted_address;
+                  // 検索結果地が含まれるように範囲を拡大
+                  bounds.extend(latlng);
+                  // マーカーのセット
+                  setMarker(latlng);
+                  // マーカーへの吹き出しの追加
+                  setInfoW(place, latlng, address);
+                  // マーカーにクリックイベントを追加
+                  markerEvent();
+                }
+              }
+            } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+              alert("見つかりません");
+            } else {
+              console.log(status);
+              alert("エラー発生");
+            }
+          });
+
+        });
+
+        // 結果クリアーボタン押下時
+        document.getElementById('clear').addEventListener('click', function() {
+          deleteMakers();
+        });
+
+      }
+
+      // マーカーのセットを実施する
+      function setMarker(setplace) {
+        // 既にあるマーカーを削除
+        deleteMakers();
+
+        var iconUrl = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+          marker = new google.maps.Marker({
+            position: setplace,
+            map: map,
+            icon: iconUrl
+          });
+        }
+
+        //マーカーを削除する
+        function deleteMakers() {
+          if(marker != null){
+            marker.setMap(null);
+          }
+          marker = null;
+        }
+
+        //フォームにlat,lng,addressを送る
+        const sendPlaceData = (lat, lng, address) => {
+          $('#address').val(address);
+          $('#latitude').val(lat);
+          $('#longitude').val(lng);
+        }
+
+        // マーカーへの吹き出しの追加
+        function setInfoW(place, latlng, address) {
+          var lat = latlng.lat()
+          var lng = latlng.lng()
+          var address = address.split(' ').slice(-1)[0]
+          infoWindow = new google.maps.InfoWindow({
+          content: `<a href="javascript:void(0)" onClick="sendPlaceData('${lat}','${lng}','${address}');return false;">` + place + "</a><br><br>" + "緯度：" + lat + "<br><br>" + "経度：" + lng + "<br><br>" + address + "<br><br>"
+        });
+      }
+
+      // クリックイベント
+      function markerEvent() {
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        });
+      }
+
+    </script>

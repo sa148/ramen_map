@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>ラーメンMap 店舗一覧</h1>
+      <%= @shops.inspect %>
+      <table>
+        <% @shops.each do |shop| %>
+            <thead>
+              <tr>
+                <td>一覧</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= shop.name%></td>
+              </tr>
+            </tbody>
+        <% end %>
+       </table>
+    </div>
+  </div>
+</div>
