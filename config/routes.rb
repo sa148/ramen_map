@@ -16,10 +16,11 @@ namespace :public do
     post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
   end
     resources :customers, only: [:show, :edit, :update, :index]
+    resources :shops, only: [:index, :show]
+    resources :contributions, only: [:new, :create, :show, :index, :edit, :update, :destroy]
     resources :contributions do
       get :search, on: :collection
    end
-    resources :contributions, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 end
 
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -30,7 +31,7 @@ namespace :admin do
   get 'homes/about' => 'homes#about'
     resources :customers, only: [:show, :index, :destroy]
     resources :contributions, only: [:new, :show, :index, :edit, :update, :destroy]
-    resources :shops, only: [:new, :show, :index, :edit, :update, :destroy]
+    resources :shops, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
