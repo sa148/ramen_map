@@ -29,9 +29,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 namespace :admin do
   get 'homes/top' => 'homes#top'
   get 'homes/about' => 'homes#about'
-    resources :customers, only: [:show, :index, :destroy]
+    resources :customers, only: [:show, :index, :destroy, :edit, :update]
     resources :contributions, only: [:new, :show, :index, :edit, :update, :destroy]
-    resources :shops, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+    resources :shops, only: [:new, :create, :show, :index]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

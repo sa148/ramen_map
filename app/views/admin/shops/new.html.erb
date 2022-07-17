@@ -35,15 +35,15 @@
           <%= f.file_field :image, accept: "image/*" %>
         </div>
           <div class="field">
-              <%= f.label :address, class: 'shop_name'%>
+              <%= f.label :住所, class: 'shop_name'%>
               <%= f.text_field :address,  id: "address", class: 'shop_introduction'%>
           </div>
           <div class="field">
-              <%= f.label :latitude, class: 'shop_name'%>
+              <%= f.label :緯度, class: 'shop_name'%>
               <%= f.text_field :latitude,  id: "latitude", class: 'shop_introduction'%>
           </div>
           <div class="field">
-              <%= f.label :longitude, class: 'shop_name'%>
+              <%= f.label :経度, class: 'shop_name'%>
               <%= f.text_field :longitude, id: "longitude", class: 'shop_introduction'%>
           </div>
         <%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
