@@ -1,28 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-<h1>投稿一覧</h1>
-<table>
-  <% @contributions.each do |contribution| %>
-  <%# @customers.each do |customer| %>
-  <thead>
-    <tr>
-      <td>投稿者<%= @customers %><br>タイトル <%= contribution.title %></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <%= link_to admin_contribution_path(contribution.id) do%>
-        <%= image_tag contribution.get_image %>
-        <% end %>
-        コメント <%= contribution.comment %>
-      </td>
-    </tr>
-  </tbody>
-  <% end %>
-  <%# end %>
-</table>
-</div>
-  </div>
+    <h1>投稿一覧</h1>
+    <table>
+      <% @contributions.each do |contribution| %>
+      <thead>
+        <tr>
+          <td>投稿者<%= @customers %><br>タイトル <%= contribution.title %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to admin_contribution_path(contribution.id) do%>
+            <%= image_tag contribution.get_image %>
+            <% end %>
+            コメント <%= contribution.comment %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
     </div>
+  </div>
+</div>
