@@ -1,0 +1,65 @@
+<h1>ラーメンMao店舗詳細</h1>
+<h2>店舗名　<%=@shop.name%></h2>
+<style>
+  #target {
+    width: 1200px;
+    height: 700px;
+  }
+</style>
+<div id="target"></div>
+<script>
+
+      var map;
+      var marker;
+      var infoWindow;
+
+      function initMap() {
+
+        //マップ初期表示の位置設定
+        var target = document.getElementById('target');
+        var centerp = {lat: <%= @shop.latitude %>, lng: <%= @shop.longitude %>};
+
+        //マップ表示
+        map = new google.maps.Map(target, {
+          center: centerp,
+          zoom: 12,
+        });
+
+       // マーカーのセットを実施する
+      function setMarker(setplace) {
+
+        var iconUrl = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+          marker = new google.maps.Marker({
+            position: setplace,
+            map: map,
+            icon: iconUrl
+          });
+        }
+
+        // マーカーへの吹き出しの追加
+        function setInfoW(place, latlng, address) {
+          infoWindow = new google.maps.InfoWindow({
+          content: "<a href='http://www.google.com/search?q=" + place + "' target='_blank'>" + place + "</a><br><br>" + address + "<br><br><a href='http://www.google.com/search?q=" + place + "&tbm=isch' target='_blank'>画像検索 by google</a>"
+        });
+      }
+
+      // クリックイベント
+      function markerEvent() {
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        });
+      }
+
+      // 緯度経度を取得
+        var latlng = new google.maps.LatLng( <%= "#{@shop.latitude}, #{@shop.longitude}" %>, false ) ;
+        // 住所を取得
+        var address = '<%= @shop.address %>'
+        // マーカーのセット
+        setMarker(latlng);
+        // マーカー
+        setInfoW('<%= @shop.name %>', latlng, address);
+        markerEvent()
+
+      }
+
+</script>

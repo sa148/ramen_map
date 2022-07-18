@@ -13,8 +13,7 @@ import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "../raty.js"
-import "//= require underscore"
-import "//= require gmaps/google"
+
 window.$ = window.jQuery = require('jquery');
 
 Rails.start()

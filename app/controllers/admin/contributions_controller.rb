@@ -4,10 +4,6 @@ class Admin::ContributionsController < ApplicationController
     @contributions = Contribution.all
   end
 
-  def show
-    @contribution = Contribution.find(params[:id])
-  end
-
   def destroy
     @contribution = Contribution.find(params[:id])
     @contribution.destroy

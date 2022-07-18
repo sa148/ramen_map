@@ -12,10 +12,9 @@
       <tbody>
         <tr>
           <td>
-            <%= link_to admin_contribution_path(contribution.id) do%>
             <%= image_tag contribution.get_image %>
-            <% end %>
             コメント <%= contribution.comment %>
+             <%= link_to '取り消し', admin_contribution_path(contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%>
           </td>
         </tr>
       </tbody>
