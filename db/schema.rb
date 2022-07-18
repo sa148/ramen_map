@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 2022_07_10_064845) do
   end
 
   create_table "contributions", force: :cascade do |t|
+    t.integer "shop_id"
+    t.string "tag_name", null: false
     t.text "title", null: false
     t.string "star", null: false
     t.string "comment", null: false

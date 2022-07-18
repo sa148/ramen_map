@@ -11,7 +11,13 @@
             </thead>
             <tbody>
               <tr>
-                <td><%= shop.name%><br><%= shop.menu_name%><br><%= shop.price%><%= link_to "店舗詳細", admin_shop_path(shop.id), class:"btn btn-info btn-sm btn-block sign_up" %></td>
+                <td>
+                  店名<%= shop.name%>
+                  <br>メニュー<%= shop.menu_name%>
+                  <br>値段<%= shop.price%>
+                  <%= link_to "店舗詳細", admin_shop_path(shop.id), class:"btn btn-info btn-sm btn-block sign_up" %>
+                  <%= link_to '取り消し', admin_shop_path(shop.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%>
+                </td>
               </tr>
             </tbody>
         <% end %>

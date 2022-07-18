@@ -4,12 +4,24 @@
       <h1>ラーメンMap 投稿ページ</h1>
         <%= form_with model: @contribution, local:true, url:public_contributions_path,method: :post do |f| %>
           <div class="field">
+            <%= f.label :店舗名 %><br />
+            <%= f.text_field :name, value: @contribution.shop.name %>
+          </div>
+          <div class="field">
+            <%= f.label :メニュー %><br />
+            <%= f.text_field :menu_name, value: @contribution.shop.menu_name %>
+          </div>
+          <div class="field">
+            <%= f.label :値段 %><br />
+            <%= f.text_field :price, value: @contribution.shop.price %>
+          </div>
+          <div class="field">
             <%= f.label :タイトル %><br />
             <%= f.text_field :title %>
           </div>
           <div class="field">
-          <%= f.label :タグ %><br />
-          <%= f.text_field :tag_name %>
+            <%= f.label :タグ %><br />
+            <%= f.text_field :tag_name %>
           </div>
           <div class="field">
             <%= f.label :評価 %><br />
@@ -30,7 +42,9 @@
               });
             </script>
           </div>
-          <br><%= f.file_field :image, accept: "image/*" %><br>
+          <div class="field">
+            <br><%= f.file_field :image, accept: "image/*" %><br>
+          </div>
           <br><%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
       <% end %>
     </div>

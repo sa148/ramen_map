@@ -20,6 +20,13 @@ class Admin::ShopsController < ApplicationController
     @shop = Shop.find(params[:id])
   end
 
+  def destroy
+    @shop = Shop.find(params[:id])
+    @shop.destroy
+    flash[:notice] = "削除しました"
+    redirect_to admin_shops_path
+  end
+
   private
 
   def shop_params

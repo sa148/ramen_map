@@ -1,9 +1,10 @@
 class Public::ContributionsController < ApplicationController
-  before_action :authenticate_customer!, except: [:show, :index]
+  before_action :authenticate_customer!, except: [:show, :index, :search]
   before_action :correct_contribution, only: [:edit, :update]
 
   def new
-    @contribution = Contribution.new
+    shop = Shop.find(params[:shop_id])
+    @contribution = shop.contributions.new
   end
 
   def create
@@ -23,6 +24,11 @@ class Public::ContributionsController < ApplicationController
   def index
     @contributions = Contribution.all
     @customers = Customer.all
+    @tag_list = Tag.all
+    if params[:tag_id] != nil
+      @contributions = Contribution.joins(:tags).where(tags: {id: params[:tag_id]})
+      flash[:notice] = "投稿の検索に成功しました"
+    end
   end
 
   def show
@@ -62,22 +68,10 @@ class Public::ContributionsController < ApplicationController
     end
   end
 
-  def search
-    @contributions = Contribution.all
-    @customers = Customer.all
-    if params[:tag_id] != nil
-      @contributions = Tag.find_by(id: params[:tag_id]).contributions
-      flash[:notice] = "投稿の検索に成功しました"
-    end
-    @tag_list = Tag.all
-  end
-
-
-
   private
 
   def  contribution_params
-    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_list)
+    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_name)
   end
 
 end

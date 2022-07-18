@@ -2,38 +2,21 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 <h1>ラーメンMapお客様一覧</h1>
-<p>画像をクリックしていただくと投稿の詳細をご確認できます</p>
+<h2>会員一覧</h2>
 <table>
   <% @customers.each do |customer| %>
-  <% @contributions.each do |contribution| %>
   <thead>
     <Tr>
-      <td>投稿者<%= customer.name %><br>タイトル <%= contribution.title %></td>
+      <td>
+        <%= customer.name %><br>
+      <td>
+
     </Tr>
   </thead>
   <tbody>
     <tr>
-      <td>
-        <%= link_to public_contribution_path(contribution.id) do%>
-        <%= image_tag contribution.get_image %>
-        <% end %>
-        <td>コメント<%= contribution.comment %><br>レビュー<div id="star-rate<%= customer.contribution.ids%>"></td>
-                     <script>
-                      $('#star-rate<%= customer.contribution.ids %>').empty();
-                      $('#star-rate<%= customer.contribution.ids%>').raty({
-                         size      : 36,
-                         starOff   : '<%= asset_path('star-off.png') %>',
-                         starOn    : '<%= asset_path('star-on.png') %>',
-                         half      : false,
-                         readOnly: true,
-                         score: <%= customer.contribution %>,
-                       });
-                     </script>
-        </td>
-      </td>
     </tr>
   </tbody>
-  <% end %>
   <% end %>
 </table>
 </div>

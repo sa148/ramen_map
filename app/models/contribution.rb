@@ -1,5 +1,5 @@
 class Contribution < ApplicationRecord
-  belongs_to :shop
+  belongs_to :shop, optional: true
   belongs_to :customer
   has_many :tagmaps, dependent: :destroy
   has_many :tags, through: :tagmaps
