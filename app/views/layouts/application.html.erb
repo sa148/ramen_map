@@ -36,6 +36,9 @@
                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
                     <p>ログアウト</p>
                   <% end %>
+                  <%= link_to public_contributions_path, class: 'nav-link text-dark' do%>
+                    <P>投稿一覧</P>
+                  <% end %>
                 <%else%>
                   <%= link_to public_shops_path, class: 'nav-link text-dark' do%>
                     <p>店舗一覧</p>

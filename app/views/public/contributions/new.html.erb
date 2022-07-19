@@ -1,20 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <% if @contribution.errors.any? %>
+      <%= @contribution.errors.count %>すべての項目を入力してください:
+      <ul>
+        <% @contribution.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <% end %>
       <h1>ラーメンMap 投稿ページ</h1>
+      <P>すべての項目を入力してください</P>
         <%= form_with model: @contribution, local:true, url:public_contributions_path,method: :post do |f| %>
-          <div class="field">
-            <%= f.label :店舗名 %><br />
-            <%= f.text_field :name, value: @contribution.shop.name %>
-          </div>
-          <div class="field">
-            <%= f.label :メニュー %><br />
-            <%= f.text_field :menu_name, value: @contribution.shop.menu_name %>
-          </div>
-          <div class="field">
-            <%= f.label :値段 %><br />
-            <%= f.text_field :price, value: @contribution.shop.price %>
-          </div>
+          <%= f.hidden_field :shop_id, :value => params[:shop_id].to_i %>
           <div class="field">
             <%= f.label :タイトル %><br />
             <%= f.text_field :title %>

@@ -1,4 +1,6 @@
 class Contribution < ApplicationRecord
+  validates :title, :tag_name, :star, :comment,
+  presence: true
   belongs_to :shop, optional: true
   belongs_to :customer
   has_many :tagmaps, dependent: :destroy

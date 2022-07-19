@@ -28,6 +28,7 @@ class Public::ContributionsController < ApplicationController
     if params[:tag_id] != nil
       @contributions = Contribution.joins(:tags).where(tags: {id: params[:tag_id]})
     end
+
     if params[:title].present?
       @contributions = Contribution.where('title LIKE ?', "%#{params[:title]}%")
     else
@@ -75,7 +76,7 @@ class Public::ContributionsController < ApplicationController
   private
 
   def  contribution_params
-    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_name)
+    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_name, :shop_id)
   end
 
 end

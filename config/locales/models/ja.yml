@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+    customer: 会員
+    attributes:
+    customer: 会員
+    name: ニックネーム
+
+ja:
+  activerecord:
+  　models:
+  　contribution: 投稿
+  　attributes:
+  　contributions: 投稿
+  　title: タイトル

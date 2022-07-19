@@ -1,4 +1,7 @@
 class Customer < ApplicationRecord
+  validates :name, :birthday, :email,
+  presence: true
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
