@@ -10,8 +10,13 @@ class Public::CustomersController < ApplicationController
 
   def update
      @customer = current_customer
-     @customer.update(customer_params)
-     redirect_to public_customer_path(@customer.id)
+     if @customer.update(customer_params)
+       redirect_to public_customer_path(@customer.id)
+       flash[:notice] = "ご登録情報の変更が終了しました"
+     else
+       flash[:notice] = "変更が失敗しました"
+       render 'edit'
+     end
   end
 
   def unsubscribe
@@ -28,7 +33,7 @@ class Public::CustomersController < ApplicationController
   private
 
   def  customer_params
-    params.require(:customer).permit(:email, :name, :birthday, :is_deleted)
+    params.require(:customer).permit(:email, :name, :birthday, :is_deleted, :password)
   end
 end
 

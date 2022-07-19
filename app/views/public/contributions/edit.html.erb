@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+       <% if @contribution.errors.any? %>
+      <%= @contribution.errors.count %>すべての項目を入力してください:
+      <ul>
+        <% @contribution.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <% end %>
       <h1>ラーメンMap投稿変更</h1>
         <%= form_with model: @contribution, local:true, url:public_contributions_path,method: :post do |f| %>
+          <%= f.hidden_field :shop_id, :value => params[:shop_id].to_i %>
           <div class="field">
             <%= f.label :タイトル %><br />
             <%= f.text_field :title %>

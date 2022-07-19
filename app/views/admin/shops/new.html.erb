@@ -34,6 +34,7 @@
           <div class="field">
             <%= f.file_field :image, accept: "image/*" %>
           </div>
+          <!--施設名称検索後マーカーの施設名の青字部分をクリックすると住所,緯度,経度,が自動で入力されます。-->
           <div class="field">
               <%= f.label :住所, class: 'shop_name'%>
               <%= f.text_field :address,  id: "address", class: 'shop_introduction'%>

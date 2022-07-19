@@ -2,6 +2,14 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <%= link_to "退会確認画面", public_customers_unsubscribe_path, class: "btn btn-danger btn-sm btn-block sign_up" %>
+        <% if @customer.errors.any? %>
+              <%= @customer.errors.count %>すべての項目を入力してください:
+              <ul>
+                <% @customer.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+        <% end %>
         <h1>お客様情報変更</h1>
           <%= form_with model: @customer,url:public_customer_path do |f| %>
             <div class="field">

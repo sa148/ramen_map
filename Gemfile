@@ -61,4 +61,5 @@ gem 'google_places'
 gem 'dotenv-rails'
 gem "gmaps4rails"
 gem "geocoder"
+gem "rails-i18n"
 gem "gon"
