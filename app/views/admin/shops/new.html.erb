@@ -2,38 +2,38 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h1>ラーメンMap　店舗情報入力　</h1>
-      <%= form_with model: @shop, local: true,  url:admin_shops_path,method: :post do |f|%>
-        <div class="field">
-          <%= f.label :店名 %><br />
-          <%= f.text_field :name %>
-        </div>
-        <div class="field">
-          <%= f.label :店舗詳細 %><br />
-          <%= f.text_field :introduction %>
-        </div>
-        <div class="field">
-          <%= f.label :メニュー %><br />
-          <%= f.text_field :menu_name %>
-        </div>
-        <div class="field">
-          <%= f.label :商品説明 %><br />
-          <%= f.text_field :menu_introduction %>
-        </div>
-        <div class="field">
-          <%= f.label :値段 %><br />
-          <%= f.text_field :price %>
-        </div>
-        <div class="field">
-          <%= f.label :電話番号 %><br />
-          <%= f.text_field :telephone_number %>
-        </div>
-        <div class="field">
-          <%= f.label :メールアドレス %><br />
-          <%= f.text_field :email %>
-        </div>
-        <div class="field">
-          <%= f.file_field :image, accept: "image/*" %>
-        </div>
+        <%= form_with model: @shop, local: true,  url:admin_shops_path,method: :post do |f|%>
+          <div class="field">
+            <%= f.label :店名 %><br />
+            <%= f.text_field :name %>
+          </div>
+          <div class="field">
+            <%= f.label :店舗詳細 %><br />
+            <%= f.text_field :introduction %>
+          </div>
+          <div class="field">
+            <%= f.label :メニュー %><br />
+            <%= f.text_field :menu_name %>
+          </div>
+          <div class="field">
+            <%= f.label :商品説明 %><br />
+            <%= f.text_field :menu_introduction %>
+          </div>
+          <div class="field">
+            <%= f.label :値段 %><br />
+            <%= f.text_field :price %>
+          </div>
+          <div class="field">
+            <%= f.label :電話番号 %><br />
+            <%= f.text_field :telephone_number %>
+          </div>
+          <div class="field">
+            <%= f.label :メールアドレス %><br />
+            <%= f.text_field :email %>
+          </div>
+          <div class="field">
+            <%= f.file_field :image, accept: "image/*" %>
+          </div>
           <div class="field">
               <%= f.label :住所, class: 'shop_name'%>
               <%= f.text_field :address,  id: "address", class: 'shop_introduction'%>
@@ -46,9 +46,9 @@
               <%= f.label :経度, class: 'shop_name'%>
               <%= f.text_field :longitude, id: "longitude", class: 'shop_introduction'%>
           </div>
-        <%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
-      <% end %>
-      <%= link_to "店舗一覧",admin_shops_path, class:"btn btn-info btn-sm btn-block sign_up"%>
+          <%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
+        <% end %>
+        <%= link_to "店舗一覧",admin_shops_path, class:"btn btn-info btn-sm btn-block sign_up"%>
     </div>
   </div>
 </div>
@@ -78,6 +78,7 @@
       var map;
       var marker;
       var infoWindow;
+      var geocoder;
 
       function initMap() {
 
@@ -85,25 +86,33 @@
         var target = document.getElementById('target');
         var centerp = {lat: 35.6893138, lng: 139.6903285};
 
+        geocoder = new google.maps.Geocoder()
+
         //マップ表示
         map = new google.maps.Map(target, {
           center: centerp,
           zoom: 12,
         });
+          // map = new google.maps.Map(document.getElementById('map'), {
+          // center: {lat: -34.397, lng: 150.644},
+          // zoom: 8
 
         // 検索実行ボタンが押下されたとき
         document.getElementById('search').addEventListener('click', function() {
 
           var place = document.getElementById('keyword').value;
           var geocoder = new google.maps.Geocoder();      // geocoderのコンストラクタ
+          var inputAddress = document.getElementById('keyword').value;
+          // geocoder.geocode( { 'keyword': inputAddress},
+          // function(results, status) {
+
 
           geocoder.geocode({
-            address: place
-          }, function(results, status) {
+          address: inputAddress
+        　 }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-
+              map.setCenter(results[0].geometry.location);
               var bounds = new google.maps.LatLngBounds();
-
               for (var i in results) {
                 if (results[0].geometry) {
                   // 緯度経度を取得

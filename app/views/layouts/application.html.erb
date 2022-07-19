@@ -12,7 +12,7 @@
   </head>
   <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-Light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-light green">
         <div class="container">
           <h1>ラーメンMap</h1>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,18 +32,25 @@
                   <p>ショップ</p>
                 <% end %>
               <% elsif customer_signed_in? %>
-                <%= link_to public_shops_path, class: 'nav-link text-dark' do%>
-                <p>店舗一覧</p>
-                <% end %>
-                <%= link_to public_customer_path(current_customer.id), class: 'nav-link text-dark' do%>
-                <p>マイページ</p>
-                <% end %>
-                <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
-                <p>ログアウト</p>
-                <% end %>
-                <%= link_to public_contributions_path, class: 'nav-link text-dark' do%>
-                <P>投稿一覧</P>
-                <% end %>
+                <% if current_customer.email == "guest@example.com"%>
+                 <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
+                    <p>ログアウト</p>
+                  <% end %>
+                <%else%>
+                  <%= link_to public_shops_path, class: 'nav-link text-dark' do%>
+                    <p>店舗一覧</p>
+                  <% end %>
+                  <%= link_to public_customer_path(current_customer.id), class: 'nav-link text-dark' do%>
+                    <p>マイページ</p>
+                  <% end %>
+                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' do%>
+                    <p>ログアウト</p>
+                  <% end %>
+                  <%= link_to public_contributions_path, class: 'nav-link text-dark' do%>
+                    <P>投稿一覧</P>
+                  <% end %>
+                <%end%>
+
               <% else %>
                 <%= link_to public_homes_guest_sign_in_path, method: :post, class: 'nav-link text-dark' do%>
                 <p>ゲストログイン</p>
