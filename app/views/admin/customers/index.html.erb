@@ -2,30 +2,30 @@
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h1>会員一覧</h1>
-      <% @customers.each do |customer|%>
-      <table>
-        <thead>
-          <tr>
-            <th>ニックネーム</th>
-            <th>生年月日</th>
-            <th>顧客状況</th>
-          </tr>
-        <thead>
-        <tbody>
-          <tr>
-            <th><%= customer.name%></th>
-            <th><%= customer.birthday%></th>
-            <th><% if customer.is_deleted == true %>
-              <p>退会</p>
-              <% else %>
-              <p>会員</p>
-              <% end %>
-            </th>
-            <th><%= link_to "顧客詳細", admin_customer_path(customer.id), class: "btn btn-secondary btn-sm btn-block sign_up" %></th>
-          </tr>
-       <tbody>
-      </table>
-      <% end %>
+        <% @customers.each do |customer|%>
+        <table>
+          <thead>
+            <tr>
+              <th>ニックネーム</th>
+              <th>生年月日</th>
+              <th>顧客状況</th>
+            </tr>
+          <thead>
+          <tbody>
+            <tr>
+              <th><%= customer.name%></th>
+              <th><%= customer.birthday%></th>
+              <th><% if customer.is_deleted == true %>
+                <p>退会</p>
+                <% else %>
+                <p>会員</p>
+                <% end %>
+              </th>
+              <th><%= link_to "顧客詳細", admin_customer_path(customer.id), class: "btn btn-secondary btn-sm btn-block sign_up" %></th>
+            </tr>
+         <tbody>
+        </table>
+        <% end %>
     </div>
   </div>
 </div>

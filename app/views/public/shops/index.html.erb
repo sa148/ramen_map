@@ -2,30 +2,30 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h1>ラーメンMap 店舗一覧</h1>
-      <%= form_with model: @contribution,url:new_public_contribution_path do |f| %>
-      <table>
-        <% @shops.each do |shop| %>
-            <thead>
-              <tr>
-                <td><h2>店舗一覧</h2></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <h3>店舗名<%= shop.name%></h3>
-                  <h3>メニュー<%= shop.menu_name%></h3>
-                  <h3>メニュー説明<%= shop.menu_introduction%></h3><br>
-                      <%= image_tag shop.get_image %><br>
-                  <h3>値段<%= shop.price%></h3>
-                  <%= link_to "店舗詳細", public_shop_path(shop.id), class:"btn btn-info btn-sm btn-block sign_up" %>
-                  <%= link_to "ラーメンMapご投稿ページ", new_public_shop_contribution_path(shop.id), class:"btn btn-primary btn-sm btn-block sign_up"%>
-                </td>
-              </tr>
-            </tbody>
+        <%= form_with model: @contribution,url:new_public_contribution_path do |f| %>
+          <table>
+            <% @shops.each do |shop| %>
+                <thead>
+                  <tr>
+                    <td><h2>店舗一覧</h2></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <h3>店舗名 <%= shop.name%></h3>
+                      <h3>メニュー <%= shop.menu_name%></h3>
+                      <h3>メニュー説明 <%= shop.menu_introduction%></h3><br>
+                          <%= image_tag shop.get_image %><br>
+                      <h3>値段<%= shop.price%></h3>
+                      <%= link_to "店舗詳細", public_shop_path(shop.id), class:"btn btn-info btn-sm btn-block sign_up" %>
+                      <%= link_to "ラーメンMapご投稿ページ", new_public_shop_contribution_path(shop.id), class:"btn btn-primary btn-sm btn-block sign_up"%>
+                    </td>
+                  </tr>
+                </tbody>
+          </table>
+            <% end %>
         <% end %>
-        <% end %>
-       </table>
     </div>
   </div>
 </div>

@@ -3,9 +3,6 @@ class Public::HomesController < ApplicationController
   def top
   end
 
-  def about
-  end
-
   def new_guest
     user = Customer.find_or_create_by!(name: 'Map', birthday: '1111', email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64

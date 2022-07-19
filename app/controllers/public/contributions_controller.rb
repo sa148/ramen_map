@@ -27,7 +27,11 @@ class Public::ContributionsController < ApplicationController
     @tag_list = Tag.all
     if params[:tag_id] != nil
       @contributions = Contribution.joins(:tags).where(tags: {id: params[:tag_id]})
-      flash[:notice] = "投稿の検索に成功しました"
+    end
+    if params[:title].present?
+      @contributions = Contribution.where('title LIKE ?', "%#{params[:title]}%")
+    else
+      @contribution = Contribution.none
     end
   end
 

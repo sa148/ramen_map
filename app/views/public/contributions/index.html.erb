@@ -2,10 +2,11 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h1>ラーメンMap　投稿一覧</h1>
+        <h1>投稿検索</h1>
         <p>画像をクリックしていただくと投稿の詳細をご確認できます</p>
         <%= form_with url: public_contributions_path, method: :get, local: true do |f| %>
-           <br><%= f.select :tag_id, @tag_list.map{|tag| [tag.tag_name, tag.id]} %><br>
-           <br><%= f.submit :検索, class: "btn btn-info btn-sm btn-block sign_up" %>
+           <br><%= f.select :tag_id, @tag_list.map{|tag| [tag.tag_name, tag.id]} %>  <%= f.text_field :title %>
+           <br><%= f.submit :タグ検索, class: "btn btn-info btn-sm " %> <%= f.submit :タイトル検索, class: "btn btn-info btn-sm "%>
         <% end %>
             <table>
               <% @contributions.each do |contribution| %>
