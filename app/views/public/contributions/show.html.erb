@@ -11,9 +11,9 @@
           <tbody>
             <tr>
               <td>
-                  店名 <%= @contribution.shop.name %> <br>
-                  メニュー  <%= @contribution.shop.menu_name %>　<br>
-                  値段<%=@contribution.shop.price%> <br>
+                  店名 <%= @shop.name %> <br>
+                  メニュー  <%= @shop.menu_name %>　<br>
+                  値段<%=@shop.price%> <br>
                   <%= image_tag @contribution.get_image %><br>
                   コメント<br> <%= @contribution.comment %><br>
                   <div class="tag">タグ<br><%= @contribution.tag_name %></div>
@@ -32,7 +32,7 @@
             </tr>
           </tbody>
         </table>
-          <%= link_to "投稿変更", edit_public_contribution_path(@contribution.id), class:"btn btn-info btn-sm btn-block sign_up" %>
+          <%= link_to "投稿変更", edit_public_contribution_path(@contribution.id,@shop.id), class:"btn btn-info btn-sm btn-block sign_up" %>
           <%= link_to '取り消し', public_contribution_path(@contribution.id), method: :delete, class: "btn btn-danger btn-sm btn-block sign_up"%>
     </div>
   </div>

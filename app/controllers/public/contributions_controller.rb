@@ -37,6 +37,7 @@ class Public::ContributionsController < ApplicationController
   end
 
   def show
+    @shop = Shop.find_by(params[:shop_id])
     @contribution = Contribution.find(params[:id])
     @contribution_tags = @contribution.tags
     @tag_list = Tag.all
@@ -44,6 +45,7 @@ class Public::ContributionsController < ApplicationController
   end
 
   def edit
+    @shop = Shop.find_by(params[:shop_id])
     @contribution = Contribution.find(params[:id])
   end
 
@@ -76,7 +78,7 @@ class Public::ContributionsController < ApplicationController
   private
 
   def  contribution_params
-    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_name, :shop_id)
+    params.require(:contribution).permit(:customer_id, :menu_id, :title, :star, :comment, :image, :tag_name, :shop_id, :shop_name, :shop_menu_name, :shop_price)
   end
 
 end
