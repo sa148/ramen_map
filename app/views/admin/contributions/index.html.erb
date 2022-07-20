@@ -6,7 +6,7 @@
         <% @contributions.each do |contribution| %>
         <thead>
           <tr>
-            <td>投稿者<%= @customers %><br>タイトル <%= contribution.title %></td>
+            <td>投稿者<%= contribution.customer.name %><br>タイトル <%= contribution.title %></td>
           </tr>
         </thead>
         <tbody>

@@ -11,7 +11,6 @@
       <% end %>
       <h1>ラーメンMap投稿変更</h1>
         <%= form_with model: @contribution, local:true, url:public_contributions_path,method: :post do |f| %>
-          <%= f.hidden_field :shop_id, :value => params[:shop_id].to_i %>
           <div class="field">
             <%= f.label :タイトル %><br />
             <%= f.text_field :title %>
@@ -42,7 +41,7 @@
           <div class="field">
             <br><%= f.file_field :image, accept: "image/*" %><br>
           </div>
-          <br><%= f.submit '投稿', class: "btn btn-primary btn-sm btn-block sign_up"%>
+          <br><%= f.submit '投稿編集', class: "btn btn-primary btn-sm btn-block sign_up"%>
         <% end %>
     </div>
   </div>

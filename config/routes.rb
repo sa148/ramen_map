@@ -20,7 +20,7 @@ namespace :public do
     resources :shops, only: [:index, :show] do
       resources :contributions, only: [:new]
     end
-    
+
 end
 
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
