@@ -1,15 +1,16 @@
 ja:
   activerecord:
     models:
-    customer: 会員
+      contribution:
+      customer: 会員
     attributes:
-    customer: 会員
-    name: ニックネーム
-
-ja:
-  activerecord:
-  　models:
-  　contribution: 投稿
-  　attributes:
-  　contributions: 投稿
-  　title: タイトル
+      contribution:
+        title: タイトル
+        tag_name: タグ名
+        comment: 評価
+        star: レビュー
+      customer:
+        name: 名前
+        birthday: 誕生日
+        email: メール
+        password: パスワード
