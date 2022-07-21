@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  validates :name, :birthday, :email,
+  validates :name, :birthday, :email, :password,
   presence: true
 
   def active_for_authentication?
