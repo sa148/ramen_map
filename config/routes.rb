@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+root to: 'homes#top'
+
 devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -6,7 +8,7 @@ devise_for :customers,skip: [:passwords], controllers: {
 
 namespace :public do
 
-  root to: 'homes#top'
+
   get 'homes/top' => 'homes#top'
   get 'homes/about' => 'homes#about'
   get 'customers/unsubscribe' => 'customers#unsubscribe'
