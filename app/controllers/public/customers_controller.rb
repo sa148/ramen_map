@@ -11,7 +11,7 @@ class Public::CustomersController < ApplicationController
   def update
      @customer = current_customer
      if @customer.update(customer_params)
-       redirect_to public_customer_path(@customer.id)
+       redirect_to public_homes_top_path
        flash[:notice] = "ご登録情報の変更が終了しました"
      else
        flash[:notice] = "変更が失敗しました"
