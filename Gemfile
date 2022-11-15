@@ -64,6 +64,10 @@ gem "geocoder"
 gem "rails-i18n"
 gem "gon"
 
+gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+gem "net-smtp"
+gem "net-pop"
+gem "net-imap"
